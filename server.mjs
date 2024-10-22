@@ -6,7 +6,9 @@ import bodyParser from 'body-parser';
 import { ObjectId } from 'mongodb';
 import { MongoClient } from 'mongodb';
 import router from  './routes/foodroute.mjs';
+import user_router from './routes/userroute.mjs';
 import error from './errorhandle.mjs';
+import mongooseDB from './db/mongooseconn.mjs';
 
 //setup
 const app = express();
@@ -14,6 +16,9 @@ const app = express();
 dotenv.config();
 
 let PORT = process.env.PORT || 3002;    
+
+//Connect to the database
+mongooseDB();
 
 //Test route
 app.get('/test', (req, res) => {
@@ -25,6 +30,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //Routes for the main route
 app.use('/main',router);
+app.use('/users',user_router);
+
+
 
 
 //Seed
@@ -43,7 +51,7 @@ app.use((req, res, next) => {
   
   app.use((err, req, res, next) => {
     res.status(err.status || 500);
-    res.render('err404', { message: err.message });
+   // res.render('err404', { message: err.message });
   });
   
 
