@@ -1,86 +1,62 @@
-// import mongoose from "mongoose";
-// import dotenv from 'dotenv';
-// import error from '../errorhandle.mjs';
-// dotenv.config();
+import mongoose from 'mongoose';
 
+const recipeSchema = new mongoose.Schema({
 
-// const userSchema = new mongoose.Schema({
-//     {
-//       "$schema": "http://json-schema.org/draft-07/schema#",
-//       "title": "Recipe",
-//       "type": "object",
-//       "required": [
-//         "_id",
-//         "name",
-//         "id",
-//         "minutes",
-//         "contributor_id",
-//         "submitted",
-//         "tags",
-//         "nutrition",
-//         "n_steps",
-//         "steps",
-//         "description",
-//         "ingredients",
-//         "n_ingredients"
-//       ],
-//       "properties": {
-//         "_id": {
-//           "type": "string",
-//           "description": "Unique identifier for the recipe"
-//         },
-//         "name": {
-//           "type": "string",
-//           "description": "Name of the recipe"
-//         },
-//         "id": {
-//           "type": "integer",
-//           "description": "Recipe ID"
-//         },
-//         "minutes": {
-//           "type": "integer",
-//           "description": "Time required to prepare the recipe in minutes"
-//         },
-//         "contributor_id": {
-//           "type": "integer",
-//           "description": "ID of the contributor who submitted the recipe"
-//         },
-//         "submitted": {
-//           "type": "string",
-//           "format": "date",
-//           "description": "Date when the recipe was submitted"
-//         },
-//         "tags": {
-//           "type": "string",
-//           "description": "Tags associated with the recipe"
-//         },
-//         "nutrition": {
-//           "type": "array",
-//           "items": {
-//             "type": "number"
-//           },
-//           "description": "Nutritional information of the recipe"
-//         },
-//         "n_steps": {
-//           "type": "integer",
-//           "description": "Number of steps in the recipe"
-//         },
-//         "steps": {
-//           "type": "string",
-//           "description": "Steps to prepare the recipe"
-//         },
-//         "description": {
-//           "type": "string",
-//           "description": "Description of the recipe"
-//         },
-//         "ingredients": {
-//           "type": "string",
-//           "description": "Ingredients required for the recipe"
-//         },
-//         "n_ingredients": {
-//           "type": "integer",
-//           "description": "Number of ingredients in the recipe"
-//         }
-//       }
-//     }
-// });
+    name: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    id: {
+        type: Number,
+        required: true
+    },
+    minutes: {
+        type: Number,
+        required: true
+    },
+    contributor_id: {
+        type: Number,
+        required: true
+    },
+    submitted: {
+        type: Date,
+        required: true
+    },
+    tags: {
+        type: [String],
+        required: true
+    },
+    nutrition: {
+        type: [Number],
+        required: true
+    },
+    n_steps: {
+        type: Number,
+        required: true
+    },
+    steps: {
+        type: [String],
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    ingredients: {
+        type: [String],
+        required: true
+    },
+    n_ingredients: {
+        type: Number,
+        required: true
+    }
+});
+
+recipeSchema.index({ id: 1 }, { unique: true });
+recipeSchema.index({ minutes: 1 }, { unique: false });
+recipeSchema.index({ n_ingredients: 1 }, { unique: false });
+
+const Recipe = mongoose.model('Recipe', recipeSchema);
+
+export default Recipe;

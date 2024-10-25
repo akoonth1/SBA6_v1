@@ -1,6 +1,6 @@
-import e from "express"
+import express from "express"
 
-let Recipes = [
+ export const Recipes = [
     {
       "_id": "67159bc614fb6ce5984aa1ba",
       "name": "chinese  candy",
