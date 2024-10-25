@@ -20,7 +20,7 @@ router.get("/test", (req, res) => {
 
 // Define a route to get all food items
 router.get("/food", async (req, res) => {
-    let food = await db.collection("Recipes").find().limit(10).toArray();
+    let food = await db.collection("recipes").find().limit(10).toArray();
     res.json(food);
 });
 
@@ -144,7 +144,7 @@ router.get("/food/ingredients/:ingredients", async (req, res) => {
 // Test for fixing individual food item
 // Define a route to fix the ingredients field for a single food item by id
 router.get("/food/fix_sample/:id", async (req, res) => {
-    let food = db.collection("Recipes");
+    let food = db.collection("recipes");
     try {
         let query = { _id: new ObjectId(req.params.id) };
         let pipeline = [
@@ -195,7 +195,7 @@ router.get("/food/fix_sample/:id", async (req, res) => {
 //Only use to fix initial data
 // Define a route to update all documents in the Recipes collection
 router.put("/food/fix_all", async (req, res) => {
-    let food = db.collection("Recipes");
+    let food = db.collection("recipes");
     console.log("Fixing all food items");
     try {
         let updateResult = await food.updateMany(

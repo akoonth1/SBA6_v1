@@ -3,17 +3,19 @@
 import express from 'express';
 import  dotenv from 'dotenv';
 import bodyParser from 'body-parser';
-import { ObjectId } from 'mongodb';
-import { MongoClient } from 'mongodb';
+// import { ObjectId } from 'mongodb';
+// import { MongoClient } from 'mongodb';
 import router from  './routes/foodroute.mjs';
 import user_router from './routes/userroute.mjs';
 import error from './errorhandle.mjs';
 import mongooseDB from './db/mongooseconn.mjs';
-import userMockData from './data/user_mock_data.mjs'; // Adjust the path as necessary
-import User from './models/user_schema.mjs'; // Adjust the path as necessary
+import userMockData from './data/user_mock_data.mjs'; 
+import User from './models/user_schema.mjs'; 
 import Review from './models/review_schema.mjs';
 import Mock_review_data from './data/Mock_review_data.mjs';
 import review_router from './routes/reviewroute.mjs';
+import Recipe from './models/recipe_schema.mjs';
+import Food_recipe_data from './data/recipesampledata.json'assert { type: "json" };
 
 
 
@@ -63,18 +65,37 @@ app.use('/reviews',review_router);
 //Validation rule will partially stop the upload of all data based on duplicate review_IDs
 //This is show show enforcement of validation rules
 
-app.get('/seed/reviews', async(req, res) => {
+// app.get('/seed/reviews', async(req, res) => {
+//     try {
+//         // Uncomment the following line if you want to delete existing data
+//         // await Review.deleteMany({});
+        
+//         // Create data
+//         await Review.create(Mock_review_data);
+//         res.send('Data seeded');
+//     } catch (err) {
+//         res.status(500).json({ error: err.message });
+//     }
+// });
+
+
+//Seed Recipe Data
+
+app.get('/seed/recipes', async(req, res) => {
     try {
         // Uncomment the following line if you want to delete existing data
-        // await Review.deleteMany({});
+        // await Recipe.deleteMany({});
         
         // Create data
-        await Review.create(Mock_review_data);
+        await Recipe.create(Food_recipe_data);
         res.send('Data seeded');
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
+
+
+
 
 
 

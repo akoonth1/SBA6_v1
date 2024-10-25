@@ -5,7 +5,7 @@ const recipeSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        unique: true
+       
     },
     id: {
         type: Number,
@@ -41,10 +41,10 @@ const recipeSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true
+        required: false
     },
     ingredients: {
-        type: [String],
+        type: String,
         required: true
     },
     n_ingredients: {
@@ -54,8 +54,8 @@ const recipeSchema = new mongoose.Schema({
 });
 
 recipeSchema.index({ id: 1 }, { unique: true });
-recipeSchema.index({ minutes: 1 }, { unique: false });
-recipeSchema.index({ n_ingredients: 1 }, { unique: false });
+// recipeSchema.index({ minutes: 1 }, { unique: false });
+// recipeSchema.index({ n_ingredients: 1 }, { unique: false });
 
 const Recipe = mongoose.model('Recipe', recipeSchema);
 
