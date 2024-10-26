@@ -1,37 +1,14 @@
-https://www.mockaroo.com/
-
 
 # Project Requirements and Routes
 
-## Requirement Weight
 
-1. **Use at least three different data collections within the database (such as users, posts, or comments).**  
-   *Weight: 5%*
+### Project Description
 
-2. **Utilize reasonable data modeling practices.**  
-   *Weight: 10%*
+This is a MongoDb, Exoress, and Node backend with 3 collections based on users, reviews, and recipes. Using the routes you can explore the database, pull users, reviews, and recipes. Recipes can be searched based on ingredients, cook time in minutes, and the standard id search.
+All collections can be updated, added to via post, and deleted. Both MongoDB and Mongoose are used. 
 
-3. **Create GET routes for all data that should be exposed to the client, using appropriate query commands to retrieve the data from the database.**  
-   *Weight: 10%*
+[GitHub Repository](https://github.com/akoonth1/SBA_6v1 "GitHub SBA6")
 
-4. **Create POST routes for data, as appropriate, using appropriate insertion commands to add data to the database. At least one data collection should allow for client creation via a POST request.**  
-   *Weight: 10%*
-
-5. **Create PATCH or PUT routes for data, as appropriate, using appropriate update commands to change data in the database. At least one data collection should allow for client manipulation via a PATCH or PUT request.**  
-   *Weight: 10%*
-
-6. **Create DELETE routes for data, as appropriate, using appropriate delete commands to remove data from the database. At least one data collection should allow for client deletion via a DELETE request.**  
-   *Weight: 10%*
-
-7. **Include sensible indexes for any and all fields that are queried frequently. For fields that may have a high write-to-read ratio, you may forgo indexes for performance considerations. Make comments of this where applicable.**  
-   *Weight: 5%*
-
-8. **Include sensible MongoDB data validation rules for at least one data collection.**  
-   *Note: This may be accomplished in a number of ways. If you choose to perform this task outside of your application's code, you must include a way to test the validation within the application's routes. This can be as simple as providing a POST route that attempts to create an invalid document and displays the resulting error.*  
-   *Weight: 5%*
-
-9. **Populate your application's collections with sample data illustrating the use case of the collections. You must include at least five sample documents per collection.**  
-   *Weight: 5%*
 
 ## Available Routes/Endpoints
 
@@ -76,3 +53,37 @@ https://www.mockaroo.com/
 - **GET /seed/users**: Seed the database with sample user data
 - **GET /seed/recipes**: Seed the database with sample recipe data
 - **GET /seed/reviews**: Seed the database with sample review data
+
+### Technologies Used
+- VS Code
+- JavaScript
+- MongoDB
+- Express
+- Node
+- Mongoose
+
+
+### How to Get Started
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/akoonth1/SBA6_v1
+    ```
+2. Navigate to the project directory:
+    ```bash
+    npm start
+    ```
+3. Open `localhost:3003` in chrome or use Thunder client or Postman
+
+4. Run `seed routes` to populate database
+
+5. Run `Fix all` route to transform data to be more searchable.
+
+### Acknowledgments
+- https://www.mockaroo.com/
+-- used for mock data
+- Recipe Dataset from Food.com via Kaggle
+--Recipe Data
+
+
+
+[GitHub Repository](https://github.com/akoonth1/SBA6_v1 "GitHub SBA6")
