@@ -53,8 +53,8 @@ const recipeSchema = new mongoose.Schema({
     }
 });
 
-recipeSchema.index({ id: 1 }, { unique: true });
-// recipeSchema.index({ minutes: 1 }, { unique: false });
+recipeSchema.index({ id: 1 }, { unique: true});
+recipeSchema.index({ minutes: 1 }, { unique: false });
 // recipeSchema.index({ n_ingredients: 1 }, { unique: false });
 
 const Recipe = mongoose.model('Recipe', recipeSchema);

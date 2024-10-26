@@ -28,7 +28,7 @@ router.get("/food", async (req, res) => {
 // Define a route to get a single food item by id
 
 router.get("/food/:id", async (req, res) => {
-    let food = db.collection("Recipes");
+    let food = db.collection("recipes");
     try {
         let query = { _id: new ObjectId(req.params.id) };
         let oneFood = await food.findOne(query);
@@ -60,7 +60,7 @@ router.get("/food/:id", async (req, res) => {
 
 
 router.get("/food/fix/:id", async (req, res) => {
-    let food = db.collection("Recipes");
+    let food = db.collection("recipes");
     try {
         let query = { _id: new ObjectId(req.params.id) };
         let pipeline = [
@@ -100,7 +100,7 @@ router.get("/food/fix/:id", async (req, res) => {
 
 //New route to get food by minutes
 router.get("/food/minutes/:minutes", async (req, res) => {
-    let food = db.collection("Recipes");
+    let food = db.collection("recipes");
     try {
         let query = { minutes: { $lte: parseInt(req.params.minutes) } };
         let foodByMinutes = await food.find(query).limit(10).toArray();
@@ -114,7 +114,7 @@ router.get("/food/minutes/:minutes", async (req, res) => {
 //New route to get food by minutes
 router.get("/food/minutes/:minutes/:skip_page", async (req, res) => {
     const skipPage = parseInt(req.params.skip_page);
-    let food = db.collection("Recipes");
+    let food = db.collection("recipes");
     try {
         let query = { minutes: { $lte: parseInt(req.params.minutes) } };
         let foodByMinutes = await food.find(query).limit(10).skip(skipPage).toArray();
@@ -126,9 +126,9 @@ router.get("/food/minutes/:minutes/:skip_page", async (req, res) => {
 
 
 
-//New route to get food by minutes
+//New route to get food by ingredients
 router.get("/food/ingredients/:ingredients", async (req, res) => {
-    let food = db.collection("Recipes");
+    let food = db.collection("recipes");
     try {
         let query = { ingredients: { $in: [req.params.ingredients] } };
         let foodByMinutes = await food.find(query).limit(10).toArray();
@@ -231,28 +231,32 @@ router.put("/food/fix_all", async (req, res) => {
 
 
 //Update by name
-router.put('/update/name/:name', async (req, res) => {
+router.patch('/update/:id', async (req, res) => {
+    let food = db.collection("recipes");
+    let query = { _id: new ObjectId(req.params.id) };
     try {
-        let updateFood = await Food.findOneAndUpdate(
-            { name: req.params.name },
-            req.body,
+        let updateFood = await food.findOneAndUpdate(
+            query,
+             { $set: req.body },
             { new: true }
+           
+           //req.params.id, req.body, { new: true }
         );
-        if (!updateUser) {
-            return res.status(404).json({ message: 'User not found' });
+        //console.log(updateFood.id); //testing
+        if (!updateFood._id) {
+            return res.status(404).json({ message: 'Food not found' });
         }
-        res.json(updateUser);
+        updateFood = await food.findOne(query);
+        res.json(updateFood);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 });
 
 
-
-
 // Define a route to delete a single food item by id
 router.delete("/food/:id", async (req, res) => {
-    let food = db.collection("newRecipes");
+    let food = db.collection("recipes");
     try {
         let query = { _id: new ObjectId(req.params.id) };
         let deleteFood = await food.deleteOne(query);
@@ -265,6 +269,36 @@ router.delete("/food/:id", async (req, res) => {
     }
 });
 
+
+// Define a route to add a new recipe
+router.post('/create', async (req, res) => {
+    let food = db.collection("recipes");
+    let newRecipe = req.body;
+    let isValid = true;
+
+    // Validate the incoming data
+    if (!newRecipe.name || !newRecipe.minutes || !newRecipe.contributor_id || !newRecipe.submitted || !newRecipe.tags || !newRecipe.nutrition || !newRecipe.n_steps || !newRecipe.steps || !newRecipe.description || !newRecipe.ingredients || !newRecipe.n_ingredients) {
+        isValid = false;
+        return res.status(400).json({ message: 'Invalid request body' });
+    }
+
+    try {
+        let result = await food.insertOne(newRecipe);
+        res.json({
+            success: true,
+            message: 'Recipe added successfully',
+            
+        });
+    } catch (err) {
+        if (err.code === 11000) {
+              res.status(500).json({
+                success: false,
+                message: 'Error adding recipe',
+                error: err.message
+            });
+        }
+    }
+});
 
 export default router;
 

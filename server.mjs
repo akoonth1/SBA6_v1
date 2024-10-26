@@ -84,7 +84,7 @@ app.use('/reviews',review_router);
 app.get('/seed/recipes', async(req, res) => {
     try {
         // Uncomment the following line if you want to delete existing data
-        // await Recipe.deleteMany({});
+        //await Recipe.deleteMany({});
         
         // Create data
         await Recipe.create(Food_recipe_data);

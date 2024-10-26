@@ -35,26 +35,44 @@ https://www.mockaroo.com/
 
 ## Available Routes/Endpoints
 
-### Users
-- **GET /users**: Retrieve all users.
-- **POST /users**: Create a new user.
-- **PATCH /users/:id**: Update a user by ID.
-- **DELETE /users/:id**: Delete a user by ID.
+### Testing
+- **GET /users/testing** : Test route
+- **GET /reviews/testing** : Test route
+- **GET /main/test** : Test route for recipes
 
-### Recipes
-- **GET /recipes**: Retrieve all recipes.
-- **POST /recipes**: Create a new recipe.
-- **PATCH /recipes/:id**: Update a recipe by ID.
-- **DELETE /recipes/:id**: Delete a recipe by ID.
+### Users
+- **GET /users/all**: Retrieve all users.
+- **GET /users/single/:id**: Retrieve user based on doc id
+- **GET /users/idnum/:idnum**: Retrieve user based on id number
+- **POST /users/create**: Create a new user.
+- **PUT /users/update/:id**: Update a user by doc id
+- **PUT /users/update/name/:name**: Update a user by name field
+- **DELETE /users/single:id**: Delete a user by id
 
 ### Reviews
-- **GET /reviews**: Retrieve all reviews.
-- **POST /reviews**: Create a new review.
-- **PATCH /reviews/:id**: Update a review by ID.
-- **DELETE /reviews/:id**: Delete a review by ID.
+- **GET /reviews/all**: Retrieve all reviews.
+- **GET /reviews/single/:id**: Retrieve review based on doc id
+- **GET /reviews/Review_ID/:Review_ID**: Retrieve review based on review id
+- **POST /reviews/create**: Create a new review.
+- **PUT /reviews/update/:id**: Update a review by doc id
+- **PATCH /reviews/update/name/:name**: Update a review by reviewer name field
+- **DELETE /reviews/single:id**: Delete a review by id
+
+### Recipes
+- **GET /main/food**: Retrieve all recipes (limit 10)
+- **GET /main/food/:id**: Retrieve food by doc id
+- **GET /main/food/minutes/:minutes**: Retrieve foods with prep-time less than minutes
+- **GET /main/food/minutes/:minutes/:skip_page**: Retrieve foods with prep-time less than minutes with pagination
+- **GET /main/food/ingredients/:ingredients**: Retrieve foods with ingredient
+- **POST /main/create**: Create a new recipe
+ **GET /main/food/fix/:id**: Retrieve food by doc id with fixed ingredient array
+- **PATCH /main/update/:id**: Update a recipe by doc id
+- **DELETE /main/food/:id**: Delete a recipe by doc id
+
+
 
 ### Additional Routes
-- **PUT /food/fix_all**: Update all food items to fix the ingredients field.
-- **GET /seed/users**: Seed the database with sample user data.
-- **GET /seed/recipes**: Seed the database with sample recipe data.
-- **GET /seed/reviews**: Seed the database with sample review data.
+- **PUT /food/fix_all**: Update all food items to fix the ingredients field
+- **GET /seed/users**: Seed the database with sample user data
+- **GET /seed/recipes**: Seed the database with sample recipe data
+- **GET /seed/reviews**: Seed the database with sample review data
