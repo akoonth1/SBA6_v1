@@ -77,8 +77,6 @@ export default router;
 
 
 
-
-
 // Test for fixing individual food item
 // // Define a route to fix the ingredients field for a single food item by id
 // router.get("/food/fix_sample/:id", async (req, res) => {

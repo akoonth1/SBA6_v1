@@ -1,5 +1,5 @@
 
-# Project Requirements and Routes
+# README
 
 
 ### Project Description
@@ -53,6 +53,7 @@ All collections can be updated, added to via post, and deleted. Both MongoDB and
 - **GET /seed/users**: Seed the database with sample user data
 - **GET /seed/recipes**: Seed the database with sample recipe data
 - **GET /seed/reviews**: Seed the database with sample review data
+- **GET /main/recipes/invalid**: check for invalid doc's in recipe collection
 
 ### Technologies Used
 - VS Code
