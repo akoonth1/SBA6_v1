@@ -217,7 +217,7 @@ async function VerificationCheck(req, res) {
         let invalidRecipes = await food.aggregate([
             {
                 $match: {
-                    $nor: [
+                    $or: [
                         { name: { $exists: false, $type: 'string' } },
                         { minutes: { $exists: false, $type: 'number' } },
                         { contributor_id: { $exists: false, $type: 'number' } },
